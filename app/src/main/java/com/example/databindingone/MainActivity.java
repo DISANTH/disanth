@@ -7,16 +7,19 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.databindingone.databinding.ActivityMainBinding;
 
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     User user;
     ActivityMainBinding binding;
-    Employee employee;
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -25,21 +28,13 @@ public class MainActivity extends AppCompatActivity {
         binding.setUser( user );
         binding.setMain(new HanleClick());
     }
-    public class HanleClick
-    {
-        public void onTriggered(View view)
-        {
-            user = new User("Khaja","Shaik",26);
-            Toast.makeText( MainActivity.this, "Hello", Toast.LENGTH_SHORT ).show();
-            employee.lastname.set("Shaik");
-            employee.firstName.set("Khaja");
-            binding.setUser(user);
+    public class HanleClick {
+        public void onTriggered(View view) {
+            String[] first = new String[]{"Disanth","Khaja","Vishnu","Bulli","Avinsah"};
+            String[] last = new String[]{"Nagidi","Shaik","Vatala","pulavarthi","thota"};
+            i++;
+            user.setFirstName(first[i%5]);
+            user.setLastName(last[i%5]);
         }
-    }
-    private class Employee
-    {
-        public final ObservableField<String> firstName = new ObservableField<>();
-        public final ObservableField<String> lastname = new ObservableField<>();
-        public final ObservableInt age = new ObservableInt();
     }
 }
